@@ -126,7 +126,7 @@
 
 
     <build>
-        <finalName>SocNetwork</finalName>
+        <finalName>TestLandingPage</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

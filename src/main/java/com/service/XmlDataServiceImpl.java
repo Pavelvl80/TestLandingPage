@@ -1,6 +1,8 @@
 package com.service;
 
+import com.dao.XmlDataDao;
 import com.model.XmlData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -23,6 +25,9 @@ public class XmlDataServiceImpl implements XmlDataService {
     @Value("${pathToElement}")
     private String path;
 
+    @Autowired
+    XmlDataDao xmlDataDao;
+
     public String findElemByUri(String xml) {
 
         DocumentBuilder db;
@@ -35,9 +40,6 @@ public class XmlDataServiceImpl implements XmlDataService {
         } catch (ParserConfigurationException | IOException | SAXException e) {
             System.err.println("Caught IOException: " + e.getMessage());
         }
-//        InputSource is = new InputSource();
-//        is.setCharacterStream(new StringReader(xml));
-//        Document doc = db.parse(is);
         XPathExpression expr;
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
@@ -54,11 +56,13 @@ public class XmlDataServiceImpl implements XmlDataService {
 
     @Override
     public XmlData save(XmlData xmlData) {
-        return null;
+        if(xmlData == null)
+            return null;
+        return xmlDataDao.save(xmlData);
     }
 
     @Override
     public XmlData getById(long id) {
-        return null;
+        return xmlDataDao.getById(id);
     }
 }

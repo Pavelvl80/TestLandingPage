@@ -17,7 +17,7 @@ public class XmlDataDaoImpl extends AbstractDAOImpl<XmlData> implements XmlDataD
 
     @Override
     public XmlData getById(long id) {
-        String hql = "from XML_STORAGE t where t.id = :id";
+        String hql = "from Xml_storage t where t.id = :id";
         Query query = getSession().createQuery(hql);
         query.setParameter("id", id);
         return (XmlData) query.uniqueResult();
