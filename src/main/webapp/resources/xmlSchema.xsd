@@ -1,0 +1,15 @@
+
+<?xml version="1.0"?>
+    <!--Схема для валидации входящий запросов. Запрос не соответствующий данной схеме будет проигнорирован-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="note">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NumberForResponse" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
