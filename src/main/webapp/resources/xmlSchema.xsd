@@ -1,11 +1,20 @@
+<?message version="1.0"?>
+<!--Схема для валидации входящий запросов. Запрос не соответствующий данной схеме будет проигнорированы
+    Путь к эелементу по которуму будет осуществляться операция должен быть заключен в тег <xc:choice>,
+    имя request и любой путь
+    пример
 
-<?xml version="1.0"?>
-    <!--Схема для валидации входящий запросов. Запрос не соответствующий данной схеме будет проигнорированы-->
+    <xc:choice>
+        <xs:element> name="request"/>
+    </xc:choice> -->
 
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="note">
-                <xs:element name="name" type="xs:string"/>
+    <xs:element name="send">
+        <xs:choice>
+            <xs:element name="request" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:choice>
     </xs:element>
 
 </xs:schema>

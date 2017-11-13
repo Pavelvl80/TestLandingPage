@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?message version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -113,7 +113,7 @@
             <version>2.0.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.ximpleware/vtd-xml -->
+        <!-- https://mvnrepository.com/artifact/com.ximpleware/vtd-message -->
         <dependency>
             <groupId>com.ximpleware</groupId>
             <artifactId>vtd-xml</artifactId>

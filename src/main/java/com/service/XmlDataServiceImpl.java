@@ -1,7 +1,6 @@
 package com.service;
 
 import com.dao.XmlDataDao;
-import com.model.XmlData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class XmlDataServiceImpl implements XmlDataService {
     XmlDataDao xmlDataDao;
 
     public String findElemByUri(String xml) {
-
         DocumentBuilder db;
         Document doc = null;
         InputSource is = new InputSource();
@@ -54,15 +52,17 @@ public class XmlDataServiceImpl implements XmlDataService {
         return result;
     }
 
-    @Override
-    public XmlData save(XmlData xmlData) {
-        if(xmlData == null)
-            return null;
-        return xmlDataDao.save(xmlData);
-    }
 
-    @Override
-    public XmlData getById(long id) {
-        return xmlDataDao.getById(id);
-    }
+
+//    @Override
+//    public XmlRequest save(XmlRequest xmlData) {
+//        if(xmlData == null)
+//            return null;
+//        return xmlDataDao.save(xmlData);
+//    }
+//
+//    @Override
+//    public XmlRequest getById(long id) {
+//        return xmlDataDao.getById(id);
+//    }
 }
