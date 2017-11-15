@@ -11,28 +11,7 @@
     <title>$Title$</title>
 </head>
 <body>
-WELCOME
-<form name="inputform" action="somewhere" method="post">
-    <input type="hidden" value="person" name="user">
-    <input type="hidden" value="password" name="pwd">
-    <input type="hidden" value="place" name="organization">
-    <input type="hidden" value="key" name="requiredkey">
-</form>
-
-<script>
-    var data = new FormData();
-    data.append('user', 'person');
-    data.append('pwd', 'password');
-    data.append('organization', 'place');
-    data.append('requiredkey', 'key');
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'somewhere', true);
-    xhr.onload = function () {
-        // do something to response
-        console.log(this.responseText);
-    };
-    xhr.send(data);
-</script>
+WELCOME <br>
+send your request in your url + /request
 </body>
 </html>
