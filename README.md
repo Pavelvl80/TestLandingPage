@@ -15,7 +15,7 @@
 5. использовать SQL-скрипты для создания структуры БД. (sql/sqlScripts.sql)
 6. Запустить проект
 
-##Условия
+## Условия
 1. Входящий запрос должен иметь тип xml (application/xml) без четко определенной
 структуры. Елемент, по которуму будет выбрана операция, указывается в конфиге.
 Входящий xml парсится с помощью XPAth,. В базу данных сохраняется id (присвается автоматически),
@@ -36,4 +36,26 @@
     <id>id</id>
     <name>name</name>
     <message>message</message>
-<response>	
+<response>
+
+## примеры запроса
+
+значение файла pathToMetaElement.properties:
+pathToElement=request/name[1]
+
+Запрос:
+<request>
+    <name>one</name>
+    <something>test</something>
+</request>
+
+значение файла pathToMetaElement.properties:
+pathToElement=send/this/element[1]
+
+Запрос:
+<send>
+    <this>
+        <element>two</element>
+    </this>
+</send>
+	
