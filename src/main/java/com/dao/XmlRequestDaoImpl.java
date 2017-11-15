@@ -4,15 +4,12 @@ import com.model.XmlRequest;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-
 /**
  * Created by Edvard Piri on 12.11.2017.
  */
 
 @Repository
-@Transactional
-public class XmlDataDaoImpl extends AbstractDAOImpl<XmlRequest> implements XmlDataDao {
+public class XmlRequestDaoImpl extends AbstractDAOImpl<XmlRequest> implements XmlRequestDao {
 //
 //    @Override
 //    public XmlRequest getById(long id) {

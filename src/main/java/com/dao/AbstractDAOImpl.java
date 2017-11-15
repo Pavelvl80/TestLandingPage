@@ -14,26 +14,25 @@ import javax.persistence.PersistenceContext;
  */
 
 @Repository
-@Transactional
 public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-//
-//    public Session getSession() {
-//        return entityManager.unwrap(Session.class);
-//    }
-//
-//    @Override
-//    public T save(T t) {
-//        if (t.getId() == null)
-//            entityManager.persist(t);
-//        else
-//            t = entityManager.merge(t);
-//        return t;
-//    }
-//
-//    @Override
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public Session getSession() {
+        return entityManager.unwrap(Session.class);
+    }
+
+    @Override
+    public T save(T t) {
+        if (t.getId() == null)
+            entityManager.persist(t);
+        else
+            t = entityManager.merge(t);
+        return t;
+    }
+
+    //    @Override
 //    public T remove(T t) {
 //        entityManager.remove(t);
 //        return t;

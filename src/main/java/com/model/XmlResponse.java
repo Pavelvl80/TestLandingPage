@@ -1,13 +1,16 @@
 package com.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by Edvard Piri on 14.11.2017.
  */
 @Entity
-//@Table(XML_RESPONSE)
-public class XmlResponse {
+@Table(name = "XML_RESPONSE")
+@XmlType(propOrder = {"responseName", "message"})
+@XmlRootElement(name = "response")
+public class XmlResponse extends BaseEntity {
     private Long id;
     private String responseName;
     private String message;
@@ -20,19 +23,22 @@ public class XmlResponse {
         this.message = message;
     }
 
-    //    @Id
-    //    @SequenceGenerator(request = "XML_RESPONSE", sequenceName = "XML_RESPONSE", allocationSize = 1)
-    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XML_RESPONSE")
+    @Id
+    @SequenceGenerator(name = "XML_RESPONSE_SEQ", sequenceName = "XML_RESPONSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XML_RESPONSE_SEQ")
+    @XmlTransient
     public Long getId() {
         return id;
     }
 
-//    @Column(name = "NAME")
+    @Column(name = "NAME")
+    @XmlElement(name = "name")
     public String getResponseName() {
         return responseName;
     }
 
-//    @Column(name = "MESSAGE")
+    @Column(name = "MESSAGE")
+    @XmlElement(name = "message")
     public String getMessage() {
         return message;
     }

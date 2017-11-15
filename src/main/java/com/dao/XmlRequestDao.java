@@ -1,11 +1,13 @@
 package com.dao;
 
+import com.model.XmlRequest;
+
 /**
  * Created by Edvard Piri on 12.11.2017.
  */
-public interface XmlDataDao {
+public interface XmlRequestDao {
 
-//    XmlRequest save(XmlRequest xmlData);
+    XmlRequest save(XmlRequest xmlData);
 //
 //    XmlRequest remove(XmlRequest xmlData);
 //

@@ -1,55 +1,52 @@
 package com.model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Created by Edvard Piri on 11.11.2017.
  */
 @Entity
-//@Table(name = "XML_REQUEST)
+//@XmlAccessorType(XmlAccessType.FIELD)
+@Table(name = "XML_REQUEST")
 public class XmlRequest extends BaseEntity {
     private Long id;
-    private String requestName;
-    private String message;
+    private String metaElementValue;
+    private String fullRequest;
 
     public XmlRequest() {
     }
 
-    public XmlRequest(String data) {
-        this.message = data;
+    public XmlRequest(String metaElementValue, String fullRequest) {
+        this.metaElementValue = metaElementValue;
+        this.fullRequest = fullRequest;
     }
 
-//    @Id
-//    @SequenceGenerator(name = "XML_REQUEST", sequenceName = "XML_REQUEST", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XML_REQUEST")
+    @Id
+    @SequenceGenerator(name = "XML_REQUEST_SEQ", sequenceName = "XML_REQUEST_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XML_REQUEST_SEQ")
     public Long getId() {
         return id;
     }
 
-//    @NotNull
-    @XmlElement(name = "request")
-//    @Column(name = "request")
-    public String getMessage() {
-        return message;
+    @Column(name = "META_ELEMENT_VALUE")
+    public String getMetaElementValue() {
+        return metaElementValue;
     }
 
-//    @NotNull
-    @XmlElement(name = "message")
-//    @Column(name = "SPEC_ELEMENT")
-    public String getRequestName() {
-        return requestName;
+    @Column(name = "FULL_REQUEST")
+    public String getFullRequest() {
+        return fullRequest;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setRequestName(String requestName) {
-        this.requestName = requestName;
+    public void setMetaElementValue(String metaElementValue) {
+        this.metaElementValue = metaElementValue;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setFullRequest(String fullRequest) {
+        this.fullRequest = fullRequest;
     }
 }

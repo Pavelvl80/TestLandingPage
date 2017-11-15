@@ -1,55 +1,61 @@
 package com.controller;
 
+import com.exceptions.BadRequestException;
+import com.exceptions.BaseException;
 import com.model.XmlRequest;
-import com.service.XmlDataServiceImpl;
+import com.model.XmlResponse;
+import com.service.XmlRequestService;
+import com.service.XmlResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  * Created by Edvard Piri on 11.11.2017.
  */
-@RequestMapping("/index")
 @Controller
 public class HomeController {
 
     @Autowired
-    XmlDataServiceImpl xmlDataService;
+    private XmlRequestService xmlRequestService;
 
-//    @RequestMapping
-//    public String homeController() {
-//        return "home";
-//    }
-    //MainRequest
+    @Autowired
+    private XmlResponseService xmlResponseService;
 
+    @RequestMapping("/")
+    public ModelAndView homepage() {
+        return new ModelAndView("index");
+    }
 
-    @RequestMapping(value = "/save",
+    @RequestMapping(value = "/request",
             method = RequestMethod.POST, headers = "content-type=application/xml")
-    public ResponseEntity<String> deleteMessage(@RequestBody XmlRequest xmlRequest) {
+    public ResponseEntity<String> XmlRequest(@RequestBody String xmlRequest) throws Exception {
+        if (xmlRequest == null) throw new BadRequestException();
 
-        xmlRequest.getRequestName();
-//        String id = xmlDataService.findElemByUri(request);
-//        if (id == null)
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//
-//        XmlRequest saved = xmlDataService.save(new XmlRequest(request));
-//        if (saved == null)
-//            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
-//
-//        XmlRequest result = xmlDataService.getById(saved.getId());
-//
-//        String response = result.getId() + result.getMessage();
-//
-//        HttpHeaders header = new HttpHeaders();
-//        header.setContentType(new MediaType("application", "xml"));
+        String metaElement = xmlRequestService.getElemByUri(xmlRequest);
+        if (metaElement == null) throw new BadRequestException();
 
-        if (xmlRequest.getRequestName() == null || xmlRequest.getMessage() == null)
-            return null;
+        XmlResponse xmlResponse = xmlResponseService.saveAndSelect(new XmlRequest(metaElement, xmlRequest));
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        String result = xmlResponseService.marshallXml(xmlResponse);
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(new MediaType("application", "xml"));
+
+        return new ResponseEntity<>(result, header, HttpStatus.OK);
+
+    }
+
+    @ExceptionHandler({BaseException.class})
+    public ModelAndView handleException(BaseException e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("userMessage", e.getUserMessage());
+        return modelAndView;
     }
 }
